@@ -1,3 +1,5 @@
+
+// Medium level =>
 /* 
   * Given an unsorted array arr of size n that contains only non negative integers, find a sub-array (continuous elements) that has sum equal to s. You mainly need to return the left and right indexes(1-based indexing) of that subarray.
 
@@ -27,6 +29,7 @@ Constraints:
 0 <= s <= 109
   */
 
+
 // Answer=> logic (Brute force approach)
 function subarraySum(arr, n, s) {
   // your code here
@@ -47,4 +50,31 @@ function subarraySum(arr, n, s) {
       return indexArr;
     }
   }
+}
+
+// Answer => Logic (Best Approch)
+function subarraySum(arr, n, s) {
+  let start = 0;
+  let currentSum = arr[0];
+
+  for (let i = 1; i <= n; i++) {
+    // Clean up the currentSum to maintain the subarray sum <= s
+    while (currentSum > s && start < i - 1) {
+      currentSum -= arr[start];
+      start++;
+    }
+
+    // Check if the current sum equals the target sum
+    if (currentSum == s) {
+      return [start + 1, i];
+    }
+
+    // Add the current element to the currentSum
+    if (i < n) {
+      currentSum += arr[i];
+    }
+  }
+
+  // If no subarray is found, return -1
+  return [-1];
 }
