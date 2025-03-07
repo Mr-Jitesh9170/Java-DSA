@@ -51,6 +51,25 @@ public class DoubleLL {
         return removedData;
     }
 
+    public static int removeLast() {
+        if (head == null) {
+            return -1;
+        }
+        if (head.next == null) {
+            int removedData = head.data;
+            head = tail = null;
+            return removedData;
+        }
+        Node temp = head;
+        while (temp.next.next != null) {
+            temp = temp.next;
+        }
+        int removedData = temp.next.data;
+        temp.next.prev = null;
+        temp.next = null;
+        return removedData;
+    }
+
     public static void printStartDLL() {
         Node temp = head;
         if (head == null) {
@@ -80,7 +99,7 @@ public class DoubleLL {
         addLast(2);
         addLast(3);
         addLast(4);
-        System.out.println(removeFirst());
-        System.out.println(removeFirst()); 
+        System.out.println(removeLast());
+        System.out.println(removeLast()); 
     }
 }
